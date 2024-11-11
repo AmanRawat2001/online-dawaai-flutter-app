@@ -1,8 +1,8 @@
-# OnlineDawai
+# Online Dawaai Flutter App
 
 ## Description
 
-OnlineDawai is a Flutter-based application designed to provide users with a seamless experience for ordering medications online. The app offers a user-friendly interface, secure payment options, and reliable delivery tracking.
+OnlineDawaai is a Flutter-based application designed to provide users with a seamless experience for ordering medications online. The app offers a user-friendly interface, secure payment options, and reliable delivery tracking.
 
 ## Features
 
@@ -19,13 +19,13 @@ OnlineDawai is a Flutter-based application designed to provide users with a seam
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/yourusername/onlinedawai.git
+    git clone https://github.com/AmanRawat2001/online-dawaai-flutter-app.git
     ```
 
 2. **Navigate to the project directory**
 
     ```bash
-    cd onlinedawai
+    cd online-dawaai-flutter-app
     ```
 
 3. **Install dependencies**
@@ -41,6 +41,14 @@ Run the application on your device or emulator:
 ```bash
 flutter run
 ```
+## Build
+
+To build the application for release, run the following command:
+
+```
+flutter build apk
+```
+
 
 ## Contributing
 
@@ -49,3 +57,28 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License.
+
+##App Screen
+App Screens
+Intro Screens 
+<table> <tr> <td><img src="https://onlinedawaai.com/gitfile/intro1.jpg" width="300" /></td> <td><img src="https://onlinedawaai.com/gitfile/intro2.jpg" width="300" /></td> <td><img src="https://onlinedawaai.com/gitfile/intor3.jpg" width="300" /></td> </tr> </table>
+<table>
+<td>
+Login Screen:
+<img src="https://onlinedawaai.com/gitfile/login.jpg" width="200" />
+</td>
+<td>
+Verification Screen:
+<img src="https://onlinedawaai.com/gitfile/verficatoin.jpg" width="200" /></td> 
+</table>
+
+
+<table>
+<td>
+Home Screen:
+<img src="https://onlinedawaai.com/gitfile/home.jpg" width="200" />
+</td>
+<td> 
+Product Screen:
+<img src="https://onlinedawaai.com/gitfile/product_view.jpg" width="200" /></td>
+</table>

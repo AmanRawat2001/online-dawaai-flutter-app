@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:onlinedawai/features/home/screens/home_screen.dart';
-import 'package:onlinedawai/product/product_screen.dart';
+import 'package:onlinedawai/features/product/product_screen.dart';
 import 'package:onlinedawai/widgets/custom_appbar.dart';
 
 class BottomNavBar extends StatefulWidget {
