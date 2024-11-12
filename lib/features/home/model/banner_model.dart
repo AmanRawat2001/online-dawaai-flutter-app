@@ -44,7 +44,7 @@ class _BannerModelState extends State<BannerModel> {
       );
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -62,6 +62,10 @@ class _BannerModelState extends State<BannerModel> {
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 0.3,
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),

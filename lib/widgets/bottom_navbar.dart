@@ -15,16 +15,14 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
   bool _isLoading = false;
-  Future<void> _handleNavItemTap(int index) async {
+  void _handleNavItemTap(int index) {
     setState(() {
       _isLoading = true;
+      _selectedIndex = index;
     });
-
-    await Future.delayed(const Duration(seconds: 1));
 
     setState(() {
       _isLoading = false;
-      _selectedIndex = index;
     });
   }
 
@@ -44,7 +42,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: CustomAppBar(
         token: widget.token,
       ),
@@ -52,8 +49,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ? const Center(child: CircularProgressIndicator())
           : _getBodyContent(),
       bottomNavigationBar: CurvedNavigationBar(
-        color: Theme.of(context).colorScheme.surface,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         buttonBackgroundColor: Theme.of(context).colorScheme.secondary,
