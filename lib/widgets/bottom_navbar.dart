@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:onlinedawai/features/healthcare/screens/healthcare_screen.dart';
 import 'package:onlinedawai/features/home/screens/home_screen.dart';
+import 'package:onlinedawai/features/labtests/screens/labtests_screen.dart';
 import 'package:onlinedawai/features/product/product_screen.dart';
 import 'package:onlinedawai/widgets/custom_appbar.dart';
+import 'package:onlinedawai/features/medicines/screens/medicines_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   final String token;
-  const BottomNavBar({super.key, required this.token});
+  final int id;
+  const BottomNavBar({super.key, required this.token, this.id = 0});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -15,10 +19,20 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
   bool _isLoading = false;
+  int? _currentId = 0;
+  @override
+  void initState() {
+    super.initState();
+    _currentId = widget.id;
+  }
+
   void _handleNavItemTap(int index) {
     setState(() {
       _isLoading = true;
       _selectedIndex = index;
+      if (index != 2) {
+        _currentId = 0;
+      }
     });
 
     setState(() {
@@ -29,6 +43,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget _getBodyContent() {
     switch (_selectedIndex) {
       case 0:
+        if (_currentId == 1) {
+          return MedicinesScreen(token: widget.token, id: _currentId ?? 0);
+        }
+        if (_currentId == 2) {
+          return LabtestsScreen(token: widget.token, id: _currentId ?? 0);
+        }
+        if (_currentId == 3) {
+          return HealthcareScreen(token: widget.token, id: _currentId ?? 0);
+        }
         return HomeScreen(token: widget.token);
       case 1:
         return const ProductScreen();

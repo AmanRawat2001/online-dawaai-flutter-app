@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onlinedawai/features/medicines/screens/medicines_screen.dart';
+import 'package:onlinedawai/widgets/bottom_navbar.dart';
 
 Widget buildIconTile(
     BuildContext context, String imagePath, String label, String token) {
@@ -9,12 +9,23 @@ Widget buildIconTile(
         case 'Medicines':
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MedicinesScreen()),
+            MaterialPageRoute(
+                builder: (context) => BottomNavBar(token: token, id: 1)),
           );
           break;
         case 'Lab Tests':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BottomNavBar(token: token, id: 2)),
+          );
           break;
         case 'Healthcare':
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BottomNavBar(token: token, id: 3)),
+          );
           break;
         default:
           // Add navigation for other categories

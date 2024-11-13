@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
 class MedicinesScreen extends StatefulWidget {
-  const MedicinesScreen({super.key});
+  final String token;
+  final int id;
+  const MedicinesScreen({super.key, required this.token, required this.id});
 
   @override
   State<MedicinesScreen> createState() => _MedicinesScreenState();
@@ -10,8 +11,10 @@ class MedicinesScreen extends StatefulWidget {
 class _MedicinesScreenState extends State<MedicinesScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(       
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Center(
+        child: Text('Medicines Screen'),
       ),
     );
   }
