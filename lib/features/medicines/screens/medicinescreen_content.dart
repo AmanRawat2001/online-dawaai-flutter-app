@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:onlinedawai/api/all_medicines_api.dart';
 import 'package:onlinedawai/features/home/model/product_detail_model.dart';
 import 'package:onlinedawai/api/singleproduct_api.dart';
-import 'package:onlinedawai/features/medicines/widgets/product_details_model.dart';
+import 'package:onlinedawai/features/medicines/models/product_list_model.dart';
 
 class MedicinescreenContent extends StatefulWidget {
   final String token;
@@ -72,7 +72,7 @@ class _MedicinescreenContentState extends State<MedicinescreenContent> {
     return Scaffold(
       body: _productList.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : ProductListView(
+          : ProductListModel(
               productList: _productList,
               nextPageUrl: _nextPageUrl,
               loadProducts: _loadProducts,

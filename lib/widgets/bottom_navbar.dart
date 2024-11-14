@@ -6,6 +6,7 @@ import 'package:onlinedawai/features/labtests/screens/labtests_screen.dart';
 import 'package:onlinedawai/features/product/product_screen.dart';
 import 'package:onlinedawai/widgets/custom_appbar.dart';
 import 'package:onlinedawai/features/medicines/screens/medicines_screen.dart';
+import 'package:onlinedawai/features/carts/screens/cart_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   final String token;
@@ -54,7 +55,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         }
         return HomeScreen(token: widget.token);
       case 1:
-        return const ProductScreen();
+        return CartScreen(token: widget.token);
       case 2:
         return const Center(child: Text('CompareItemsScreen'));
       default:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onlinedawai/main.dart';
+import 'package:onlinedawai/widgets/mainscreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

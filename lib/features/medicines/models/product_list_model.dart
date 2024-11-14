@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class ProductListView extends StatelessWidget {
+class ProductListModel extends StatelessWidget {
   final List<dynamic> productList;
   final String? nextPageUrl;
   final Function(String?) loadProducts;
   final ScrollController scrollController;
   final Function(BuildContext, int) showProductDetails;
 
-  const ProductListView({
-    Key? key,
+  const ProductListModel({
+    super.key,
     required this.productList,
     required this.nextPageUrl,
     required this.loadProducts,
     required this.scrollController,
     required this.showProductDetails,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,39 @@ class ProductListView extends StatelessWidget {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Price: ₹${product['product_price']}'),
+                Row(
+                  children: [
+                    Text(
+                      'Discount price: ₹${product['total_amount'] ?? 'N/A'}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Price: ${product['product_price'] ?? 'N/A'}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      '${product['product_discount']} off',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
                 Text('Company: ${product['company']['company_name']}'),
-                Text('Category: ${product['category']['category_name']}'),
+                Text(
+                    'Category: ${product['category']['category_name'] ?? 'N/A'} '),
                 Text(
                     'Subcategory: ${product['subcategory']?['sub_category_name'] ?? 'N/A'}'),
               ],

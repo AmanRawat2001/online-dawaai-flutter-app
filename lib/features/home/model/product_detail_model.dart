@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ProductDetailsModel extends StatefulWidget {
   final Map<String, dynamic> productDetails;
@@ -10,6 +12,48 @@ class ProductDetailsModel extends StatefulWidget {
 
 class _ProductDetailsModelState extends State<ProductDetailsModel> {
   int quantity = 1;
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+  bool isAddingToCart = false;
+
+  Future<void> addToCart(
+      Map<String, dynamic> productDetails, int quantity) async {
+    setState(() {
+      isAddingToCart = true;
+    });
+    String? cartJson = await _secureStorage.read(key: 'cart');
+    List<Map<String, dynamic>> cart = [];
+    if (cartJson != null && cartJson.isNotEmpty) {
+      cart = List<Map<String, dynamic>>.from(json.decode(cartJson));
+    }
+    final existingProductIndex =
+        cart.indexWhere((item) => item['id'] == productDetails['id']);
+
+    if (existingProductIndex != -1) {
+      setState(() {
+        cart[existingProductIndex]['quantity'] += quantity;
+      });
+    } else {
+      setState(() {
+        cart.add({
+          'id': productDetails['id'],
+          'quantity': quantity,
+        });
+      });
+    }
+
+    await _secureStorage.write(key: 'cart', value: json.encode(cart));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text('Added ${productDetails['product_name']} to cart!')),
+    );
+    Navigator.pop(context); // This will close the modal
+
+    setState(() {
+      isAddingToCart = false;
+    });
+    print('Cart updated: $cart');
+  }
+
   @override
   Widget build(BuildContext context) {
     final productDetails = widget.productDetails;
@@ -37,7 +81,7 @@ class _ProductDetailsModelState extends State<ProductDetailsModel> {
                 Text(
                   productDetails['product_name'],
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
@@ -132,10 +176,17 @@ class _ProductDetailsModelState extends State<ProductDetailsModel> {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    print('Added $quantity of ${productDetails['id']} to cart');
-                  },
-                  child: Text('Add to Cart'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  onPressed: isAddingToCart
+                      ? null
+                      : () {
+                          addToCart(productDetails, quantity);
+                        },
+                  child: isAddingToCart
+                      ? CircularProgressIndicator()
+                      : Text('Add to Cart'),
                 ),
               ],
             ),
