@@ -15,7 +15,7 @@ class _HealthcareScreenState extends State<HealthcareScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
-        child: Text('HealthcareScreen'),
+        child: Text('Comming Soon'),
       ),
     );
   }

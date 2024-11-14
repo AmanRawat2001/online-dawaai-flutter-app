@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:onlinedawai/api/singleproduct_api.dart';
+import 'package:onlinedawai/features/carts/widgets/cart_checkout.dart';
+import 'package:onlinedawai/features/carts/widgets/cart_item_lsit.dart';
 
 class CartScreen extends StatefulWidget {
   final String token;
@@ -82,11 +84,13 @@ class _CartScreenState extends State<CartScreen> {
         productDetails[id] = productData;
         loadingProduct[id] = false;
       });
+      // ignore: avoid_print
       print('Product details for ID $id: $productData');
     } catch (e) {
       setState(() {
         loadingProduct[id] = false;
       });
+      // ignore: avoid_print
       print("Error fetching product data: $e");
     }
   }
@@ -109,121 +113,23 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cart')),
       body: cart.isEmpty
           ? Center(child: Text('Your cart is empty'))
           : Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: cart.length,
-                    itemBuilder: (context, index) {
-                      final item = cart[index];
-                      final productId = item['id'];
-
-                      // Check if product data is already fetched
-                      if (productDetails[productId] == null &&
-                          !loadingProduct.containsKey(productId)) {
-                        // Fetch product details after the frame has finished building
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          _fetchProductDetails(productId);
-                        });
-                      }
-
-                      return ListTile(
-                        // title: Text('Product ID: ${item['id']}'),
-                        title: Text(productDetails[productId]
-                                ?['product_name'] ??
-                            'Product Details'),
-                        subtitle: Text(
-                            'Quantity: ${item['quantity']} x ₹${productDetails[productId]?['total_amount']}'),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Increase button
-                            IconButton(
-                              icon: Icon(Icons.add),
-                              onPressed: () => _increaseQuantity(index),
-                            ),
-                            // Decrease button
-                            IconButton(
-                              icon: Icon(Icons.remove),
-                              onPressed: () => _decreaseQuantity(index),
-                            ),
-                            // Delete button
-                            IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () => _removeItem(index),
-                            ),
-                          ],
-                        ),
-                        // Show product details if available
-                        onTap: () {
-                          if (productDetails[productId] != null) {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    productDetails[productId]
-                                            ?['product_name'] ??
-                                        'Product Details',
-                                  ),
-                                  content: loadingProduct[productId] == true
-                                      ? Center(
-                                          child: CircularProgressIndicator())
-                                      : SingleChildScrollView(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Image.network(
-                                                productDetails[productId]
-                                                    ?['product_image'],
-                                                fit: BoxFit.cover,
-                                              ),
-                                              Text(
-                                                'Name: ${productDetails[productId]?['product_name']}',
-                                              ),
-                                              Text(
-                                                'Price: ₹${productDetails[productId]?['product_price']}',
-                                              ),
-                                              Text(
-                                                'Discount: ${productDetails[productId]?['product_discount']}',
-                                              ),
-                                              Text(
-                                                'After Discount: ₹${productDetails[productId]?['total_amount']}',
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                      );
-                    },
+                  child: CartItemList(
+                    cart: cart,
+                    productDetails: productDetails,
+                    loadingProduct: loadingProduct,
+                    fetchProductDetails: _fetchProductDetails,
+                    decreaseQuantity: _decreaseQuantity,
+                    increaseQuantity: _increaseQuantity,
+                    removeItem: _removeItem,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total: ₹${_calculateTotalAmount().toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle checkout action
-                        },
-                        child: Text('Checkout'),
-                      ),
-                    ],
-                  ),
+                CartCheckout(
+                  totalAmount: _calculateTotalAmount(),
                 ),
               ],
             ),

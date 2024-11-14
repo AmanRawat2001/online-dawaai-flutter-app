@@ -3,7 +3,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:onlinedawai/features/healthcare/screens/healthcare_screen.dart';
 import 'package:onlinedawai/features/home/screens/home_screen.dart';
 import 'package:onlinedawai/features/labtests/screens/labtests_screen.dart';
-import 'package:onlinedawai/features/product/product_screen.dart';
 import 'package:onlinedawai/widgets/custom_appbar.dart';
 import 'package:onlinedawai/features/medicines/screens/medicines_screen.dart';
 import 'package:onlinedawai/features/carts/screens/cart_screen.dart';
