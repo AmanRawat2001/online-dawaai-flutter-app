@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:onlinedawai/features/home/model/product_detail_model.dart';
 import 'package:onlinedawai/api/singleproduct_api.dart';
 
+final SingleproductApi _singleproductApi = SingleproductApi();
+
 Widget buildProductTile(
   BuildContext context,
   String productName,
@@ -114,7 +116,7 @@ Widget buildProductTile(
 }
 
 void _showProductDetails(BuildContext context, int productId) {
-  fetchData(productId).then((data) {
+  _singleproductApi.fetchData(productId).then((data) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

@@ -81,21 +81,21 @@ class _ProductDetailsModelState extends State<ProductDetailsModel> {
                 SizedBox(height: 10),
                 if (productDetails.isNotEmpty) ...[
                   Text(
-                    'Company: ${productDetails['company']['company_name']}',
+                    'Company: ${productDetails['company'] != null ? productDetails['company']['company_name'] : 'N/A'}',
                     style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).colorScheme.onSurface),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Category: ${productDetails['category']['category_name']}',
+                    'Category: ${productDetails['category'] != null ? productDetails['category']['category_name'] : 'N/A'}',
                     style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).colorScheme.onSurface),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'SubCategory: ${productDetails['subcategory']['sub_category_name']}',
+                    'Subcategory: ${productDetails['subcategory'] != null ? productDetails['subcategory']['sub_category_name'] : 'N/A'}',
                     style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).colorScheme.onSurface),

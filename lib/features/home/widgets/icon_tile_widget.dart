@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:onlinedawai/widgets/bottom_navbar.dart';
+import 'package:onlinedawai/features/healthcare/screens/healthcare_screen.dart';
+import 'package:onlinedawai/features/labtests/screens/labtests_screen.dart';
+import 'package:onlinedawai/features/medicines/screens/medicines_screen.dart';
 
 Widget buildIconTile(
     BuildContext context, String imagePath, String label, String token) {
@@ -10,21 +12,21 @@ Widget buildIconTile(
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BottomNavBar(token: token, id: 1)),
+                builder: (context) => MedicinesScreen(token: token, id: 1)),
           );
           break;
         case 'Lab Tests':
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BottomNavBar(token: token, id: 2)),
+                builder: (context) => LabtestsScreen(token: token, id: 2)),
           );
           break;
         case 'Healthcare':
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BottomNavBar(token: token, id: 3)),
+                builder: (context) => HealthcareScreen(token: token, id: 3)),
           );
           break;
         default:
