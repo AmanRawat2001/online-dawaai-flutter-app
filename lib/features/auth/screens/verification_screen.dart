@@ -93,6 +93,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
@@ -100,10 +102,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-              image: AssetImage('assets/images/login_image.png'),
-              width: 300,
-            ),
+            if (!keyboardVisible) SizedBox(height: 80),
+            if (!keyboardVisible)
+              Image(
+                image: AssetImage('assets/images/login_image.png'),
+                width: 300,
+              ),
             Text(
               'OTP Verfication',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -137,7 +141,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               isOtpComplete: isOtpComplete,
             ),
 
-            SizedBox(height: 10),
+            SizedBox(height: 8),
 
             // Use Resend Buttons Widget
             ResendButtons(

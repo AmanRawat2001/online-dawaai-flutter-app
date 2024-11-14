@@ -81,7 +81,7 @@ class _ProductDetailsModelState extends State<ProductDetailsModel> {
                 Text(
                   productDetails['product_name'],
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
@@ -141,7 +141,7 @@ class _ProductDetailsModelState extends State<ProductDetailsModel> {
                   Text(
                     'Subcategory: ${productDetails['subcategory'] != null ? productDetails['subcategory']['sub_category_name'] : 'N/A'}',
                     style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ],
