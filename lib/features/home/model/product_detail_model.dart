@@ -36,6 +36,7 @@ class _ProductDetailsModelState extends State<ProductDetailsModel> {
       setState(() {
         cart.add({
           'id': productDetails['id'],
+          'total_amount': productDetails['total_amount'],
           'quantity': quantity,
         });
       });

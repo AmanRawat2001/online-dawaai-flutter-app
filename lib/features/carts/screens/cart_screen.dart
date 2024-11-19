@@ -130,6 +130,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 CartCheckout(
                   totalAmount: _calculateTotalAmount(),
+                  cart: cart,
                 ),
               ],
             ),
